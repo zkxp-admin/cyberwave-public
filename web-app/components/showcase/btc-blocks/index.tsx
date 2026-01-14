@@ -153,7 +153,12 @@ function BlockCard({ block }: BlockCardProps) {
 }
 
 export function BTCBlocks() {
-  const [currentIndex, setCurrentIndex] = React.useState(0)
+  // Calculate initial index from sample data before filtering
+  const initialCurrentIndex = React.useMemo(() => {
+    const pastCount = sampleBTCBlocks.filter((b) => b.status === 'past').length
+    return pastCount
+  }, [])
+
   const pastBlocks = sampleBTCBlocks.filter((b) => b.status === 'past')
   const currentBlock = sampleBTCBlocks.find((b) => b.status === 'current')
   const futureBlocks = sampleBTCBlocks.filter((b) => b.status === 'future')
@@ -161,6 +166,9 @@ export function BTCBlocks() {
   // All blocks for carousel
   const allBlocks = [...pastBlocks, currentBlock!, ...futureBlocks]
   const totalBlocks = allBlocks.length
+  
+  // Initialize carousel at the current block
+  const [currentIndex, setCurrentIndex] = React.useState(initialCurrentIndex)
 
   // For desktop carousel: show 3 blocks at a time
   const blocksToShow = 3
