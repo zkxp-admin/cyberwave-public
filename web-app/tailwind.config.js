@@ -1,0 +1,21 @@
+const { heroui } = require('@heroui/theme')
+
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: [
+    './components/**/*.{js,ts,jsx,tsx,mdx}',
+    './app/**/*.{js,ts,jsx,tsx,mdx}',
+    './lib/**/*.{js,ts,jsx,tsx,mdx}',
+    './node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}',
+  ],
+  theme: {
+    extend: {
+      fontFamily: {
+        inter: ['var(--font-inter)'],
+        orbitron: ['var(--font-orbitron)'],
+      },
+    },
+  },
+  darkMode: 'class',
+  plugins: [heroui()],
+}

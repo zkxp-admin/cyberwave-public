@@ -1,0 +1,64 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'tailwindcss-safe-area';
+
+@config '../tailwind.config.js';
+
+.orbitron {
+  font-family: var(--font-orbitron), sans-serif;
+}
+
+.inter {
+  font-family: var(--font-inter), sans-serif;
+}
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  /* HeroUI Primary Override */
+  --color-primary: var(--brand-color);
+
+  --font-display: var(--font-orbitron), sans-serif;
+  --font-sans: var(--font-inter), sans-serif;
+}
+
+:root {
+  --background: #f2f2f3;
+  --foreground: #000000;
+  --brand-color: #3366ff;
+}
+
+.dark {
+  --background: #000000;
+  --foreground: #ffffff;
+}
+
+/* Set html background to match default-100 in light mode for safe area */
+/* This ensures the safe area matches the page background */
+html {
+  background-color: var(--background);
+}
+
+/* Hide all scrollbars globally */
+html,
+body,
+* {
+  scrollbar-width: none !important; /* Firefox */
+  -ms-overflow-style: none !important; /* IE and Edge */
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar,
+*::-webkit-scrollbar {
+  display: none !important; /* Chrome, Safari, Opera */
+  width: 0 !important;
+  height: 0 !important;
+}
+
+/* Reusable Card Styles */
+.card-color-base {
+  @apply bg-content1 border-default-100 border shadow-xs;
+}

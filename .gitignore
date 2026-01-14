@@ -3,3 +3,4 @@
 bun.lock
 .env
 .next
+/web-app/node_modules

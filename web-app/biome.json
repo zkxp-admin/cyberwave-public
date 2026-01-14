@@ -1,0 +1,68 @@
+{
+  "$schema": "https://biomejs.dev/schemas/2.2.0/schema.json",
+  "vcs": {
+    "enabled": true,
+    "clientKind": "git",
+    "useIgnoreFile": true
+  },
+  "files": {
+    "ignoreUnknown": true,
+    "includes": ["**", "!node_modules", "!.next", "!dist", "!build", "!source"]
+  },
+  "formatter": {
+    "enabled": true,
+    "indentStyle": "space",
+    "lineWidth": 90
+  },
+  "linter": {
+    "enabled": true,
+    "domains": {
+      "next": "recommended",
+      "react": "recommended"
+    },
+    "rules": {
+      "recommended": true,
+      "correctness": {
+        "useHookAtTopLevel": "error",
+        "noUnusedImports": "error",
+        "useExhaustiveDependencies": "warn",
+        "useImportExtensions": "off"
+      },
+      "a11y": {
+        "noSvgWithoutTitle": "off"
+      },
+      "complexity": {
+        "useSimplifiedLogicExpression": "warn"
+      },
+      "performance": {
+        "noImgElement": "off"
+      },
+      "security": {},
+      "style": {
+        "noDefaultExport": "off",
+        "useNamingConvention": "off",
+        "useBlockStatements": "error",
+        "noImplicitBoolean": "warn"
+      },
+      "suspicious": {
+        "noReactSpecificProps": "off",
+        "noConsole": "off",
+        "noUnknownAtRules": "off"
+      }
+    }
+  },
+  "assist": {
+    "actions": {
+      "source": {
+        "organizeImports": "on"
+      }
+    }
+  },
+  "javascript": {
+    "formatter": {
+      "quoteStyle": "single",
+      "semicolons": "asNeeded",
+      "indentStyle": "space"
+    }
+  }
+}
