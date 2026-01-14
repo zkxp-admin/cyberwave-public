@@ -1,28 +1,65 @@
-# Components Showcase
+# CyberWave Web Components Showcase
 
-This directory contains the component showcase system with a centralized registry for easy component management.
+A collection of reusable React components built with Next.js, TypeScript, and Tailwind CSS. This showcase demonstrates various UI components for dashboards, analytics, and system monitoring.
 
-## Architecture
+## Tech Stack
 
-The showcase uses a **centralized registry pattern** that makes it easy to add new components without modifying multiple files.
+This project is built with the following technologies and libraries:
 
-### Key Files
+- **[Next.js](https://nextjs.org/)** (v16.1.1) - React framework for production
+- **[React](https://react.dev/)** (v19.2.3) - UI library
+- **[TypeScript](https://www.typescriptlang.org/)** - Type safety
+- **[Tailwind CSS](https://tailwindcss.com/)** (v4.1.18) - Utility-first CSS framework
+- **[HeroUI](https://heroui.com/)** - React component library
+  - `@heroui/react` - Core component library
+  - `@heroui/toast` - Toast notification system
+- **[Lucide React](https://lucide.dev/)** - Icon library
+- **[next-themes](https://github.com/pacocoursey/next-themes)** - Theme switching (dark/light mode)
+- **[Zod](https://zod.dev/)** - TypeScript-first schema validation
+- **[Framer Motion](https://www.framer.com/motion/)** - Animation library
+- **[Vaul](https://vaul.emilkowal.ski/)** - Drawer component library
 
-- **`component-registry.tsx`** - Central registry where all components are defined
-- **`components-sidebar.tsx`** - Desktop sidebar navigation (auto-populated from registry)
-- **`components-dropdown.tsx`** - Mobile/tablet dropdown menu (auto-populated from registry)
-- **`app/components/page.tsx`** - Main page that dynamically renders components
+## Available Components
+
+### Overall Status
+**Description:** System health, performance, and security metrics
+
+Displays key system metrics with circular progress indicators, showing status cards for different aspects of system health.
+
+### System Overview
+**Description:** Storage, database, users, and server load statistics
+
+Provides an overview of system resources including storage capacity, database status, user counts, and server load metrics.
+
+### Metrics Dials
+**Description:** Real-time CPU, memory, and network metrics
+
+Visual dial indicators showing real-time system performance metrics including CPU usage, memory consumption, and network activity.
+
+### Notifications
+**Description:** Notification items with different types and states
+
+A notification system component that displays various notification types (success, warning, error, info) with different states and actions.
+
+### BTC Blocks
+**Description:** Bitcoin blockchain blocks with mining status
+
+A Bitcoin blockchain visualization component that displays blocks in a carousel format, showing past mined blocks, the current block being mined, and future pending blocks. Features include:
+- Carousel navigation (desktop shows 3 blocks, mobile shows 1)
+- Block states: past (mined), current (being mined), future (pending)
+- Block information: number, timestamp, transaction count, reward, hash, and size
+- Live indicator and dot navigation
 
 ## Adding a New Component
 
-To add a new component to the showcase, follow these steps:
+To add a new component to the showcase, follow these three simple steps:
 
-### 1. Create Your Component
+### Step 1: Create Your Component
 
-Create your component in the `showcase/` directory:
+Create your component in the `web-app/components/showcase/` directory:
 
 ```tsx
-// showcase/my-new-component/index.tsx
+// web-app/components/showcase/my-new-component/index.tsx
 export function MyNewComponent() {
   return (
     <div>
@@ -32,18 +69,18 @@ export function MyNewComponent() {
 }
 ```
 
-### 2. Export from showcase/index.ts
+### Step 2: Export from showcase/index.ts
 
 Add your component to the showcase exports:
 
 ```tsx
-// showcase/index.ts
+// web-app/components/showcase/index.ts
 export { MyNewComponent } from './my-new-component'
 ```
 
-### 3. Register in component-registry.tsx
+### Step 3: Register in component-registry.tsx
 
-Add your component to the `COMPONENT_REGISTRY` array:
+Add your component to the `COMPONENT_REGISTRY` array in `web-app/components/component-registry.tsx`:
 
 ```tsx
 import { MyNewComponent } from '@/components/showcase'
@@ -71,105 +108,40 @@ Your component will automatically appear in:
 
 ## Component Registry Structure
 
-Each component in the registry has the following properties:
+Each component in the registry requires:
 
-```tsx
-interface ComponentConfig {
-  id: string                      // Unique identifier (kebab-case)
-  label: string                   // Display name
-  icon: LucideIcon               // Icon from lucide-react
-  description: string            // Brief description for the dropdown
-  component: React.ComponentType // The actual component to render
-}
-```
-
-## Benefits of This Architecture
-
-1. **Single Source of Truth** - All components defined in one place
-2. **Type Safety** - TypeScript ensures valid component IDs
-3. **Automatic Updates** - Sidebar and dropdown auto-populate
-4. **Easy Maintenance** - Add/remove components in one file
-5. **Consistent UI** - All navigation elements stay in sync
-6. **Scalable** - Can easily add 10, 20, or 100+ components
+- **id**: Unique identifier in kebab-case (e.g., `'my-new-component'`)
+- **label**: Display name shown in navigation (e.g., `'My New Component'`)
+- **icon**: Icon from [Lucide React](https://lucide.dev/icons/)
+- **description**: Brief description shown in the dropdown menu
+- **component**: The actual React component to render
 
 ## Icons
 
-We use [Lucide React](https://lucide.dev/) for icons. Browse available icons at:
-https://lucide.dev/icons/
+We use [Lucide React](https://lucide.dev/) for icons. Browse available icons at: https://lucide.dev/icons/
 
 Common icons used:
 - `Shield` - Security/status
 - `BarChart3` - Analytics/overview
 - `Cpu` - Performance/metrics
 - `Bell` - Notifications
-- `Database` - Data/storage
-- `Network` - Connectivity
-- `Settings` - Configuration
 - `Bitcoin` - Bitcoin/blockchain related
-
-## Available Components
-
-### BTC Blocks
-
-A Bitcoin blockchain visualization component that displays blocks in a carousel format, showing past mined blocks, the current block being mined, and future pending blocks.
-
-**Location:** `showcase/btc-blocks/`
-
-**Features:**
-- **Carousel Navigation**: Desktop shows 3 blocks at a time with smooth transitions (pure Tailwind CSS)
-- **Mobile Support**: Single block carousel with swipe navigation
-- **Block States**: 
-  - Past blocks (mined) - Gray styling
-  - Current block (being mined) - Blue highlight with animated border
-  - Future blocks (pending) - Purple styling
-- **Block Information**:
-  - Block number
-  - Timestamp (for mined blocks) or Miner name (for pending blocks)
-  - Transaction count
-  - Block reward (BTC)
-  - Block hash (for mined blocks)
-  - Block size (for mined blocks)
-- **Live Indicator**: Green "Live" badge showing real-time status
-- **Dot Navigation**: Clickable dots for quick navigation between blocks
-
-**Data Structure:**
-```typescript
-interface BTCBlock {
-  blockNumber: number
-  timestamp: number | null // null for future blocks
-  txCount: number | null // null for future blocks
-  reward: number
-  miner: string | null // null for past blocks, shown for future
-  status: 'past' | 'current' | 'future'
-  hash?: string // only for past/current blocks
-  size?: number // in MB, only for past blocks
-}
-```
-
-**Usage:**
-The component uses sample data by default (`sample-data.ts`). To integrate with real data, replace the `sampleBTCBlocks` import with your data source.
-
-**Styling:**
-- Uses Tailwind CSS exclusively for all animations and transitions
-- Responsive design with mobile-first approach
-- Dark mode support
-- Smooth carousel transitions using CSS transforms
 
 ## Example: Adding a "User Management" Component
 
 ```tsx
 // 1. Create the component
-// showcase/user-management/index.tsx
+// web-app/components/showcase/user-management/index.tsx
 export function UserManagement() {
   return <div>User Management Component</div>
 }
 
 // 2. Export it
-// showcase/index.ts
+// web-app/components/showcase/index.ts
 export { UserManagement } from './user-management'
 
 // 3. Register it
-// component-registry.tsx
+// web-app/components/component-registry.tsx
 import { Users } from 'lucide-react'
 import { UserManagement } from '@/components/showcase'
 
