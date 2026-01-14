@@ -5,11 +5,13 @@ import {
   Cpu,
   Shield,
   Bitcoin,
+  Wifi,
   type LucideIcon,
 } from 'lucide-react'
 import {
   BTCBlocks,
   MetricsDials,
+  NetworkStatus,
   Notifications,
   OverallStatus,
   SystemOverview,
@@ -48,6 +50,13 @@ export const COMPONENT_REGISTRY: ComponentConfig[] = [
     icon: Cpu,
     description: 'Real-time CPU, memory, and network metrics',
     component: MetricsDials,
+  },
+  {
+    id: 'network-status',
+    label: 'Network Status',
+    icon: Wifi,
+    description: 'Real-time network connection status and metrics',
+    component: NetworkStatus,
   },
   {
     id: 'notifications',

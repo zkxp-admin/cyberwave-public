@@ -1,5 +1,6 @@
 export { BTCBlocks } from './btc-blocks'
 export { MetricsDials } from './metrics-dials'
+export { NetworkStatus } from './network-status'
 export { Notifications } from './notification-item'
 export { OverallStatus } from './overall-status'
 export { SystemOverview } from './system-overview'
